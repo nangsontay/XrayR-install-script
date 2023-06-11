@@ -16,8 +16,8 @@ Nodes:
   -
     PanelType: "SSpanel" # Panel type: SSpanel
     ApiConfig:
-      ApiHost: "https://zero.fuzzypn.me"
-      ApiKey: "v2raytqtfuzzy17"
+      ApiHost: ""
+      ApiKey: ""
       NodeID: 1
       NodeType: Trojan # Node type: V2ray, Shadowsocks, Trojan, Shadowsocks-Plugin
       Timeout: 30 # Timeout for the api request
