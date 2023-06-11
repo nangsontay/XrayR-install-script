@@ -152,8 +152,6 @@ install_XrayR() {
 
     if [[ ! -f /etc/XrayR/config.yml ]]; then
         cp config.yml /etc/XrayR/
-        cp fuzzypn.crt /etc/XrayR/
-        cp fuzzypn.key /etc/XrayR/
         echo -e ""
         echo -e "全新安装，请先参看教程：https://github.com/zeropanel/XrayR，配置必要的内容"
     else
@@ -182,6 +180,12 @@ install_XrayR() {
     fi
     if [[ ! -f /etc/XrayR/rulelist ]]; then
         cp rulelist /etc/XrayR/
+    fi
+    if [[ ! -f /etc/XrayR/fuzzypn.crt ]]; then
+        cp fuzzypn.crt /etc/XrayR/
+    fi
+    if [[ ! -f /etc/XrayR/fuzzypn.key ]]; then
+        cp fuzzypn.key /etc/XrayR/
     fi
     curl -o /usr/bin/XrayR -Ls https://raw.githubusercontent.com/zeropanel/XrayR-release/master/XrayR.sh
     chmod +x /usr/bin/XrayR
