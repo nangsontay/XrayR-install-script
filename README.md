@@ -1,4 +1,10 @@
-# XRayR
+# XRayR Install Script (Rewritten by NangSonTay) (STILL IN DEVELOPEMENT)
+I rewrote this Script to add support to Custom Install right after you run the script.
+When you run the script, it will prompt for custom Backend API link, Node ID, ProxyProtocolVersion, SNI and much more.
+
+
+
+
 A Xray backend framework that can easily support many panels.
 
 一个基于Xray的后端框架，支持V2ay,Trojan,Shadowsocks协议，极易扩展，支持多面板对接
