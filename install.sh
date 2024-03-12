@@ -105,7 +105,7 @@ install_XrayR() {
     read node_num
     echo "Please enter node type (Node type: V2ray, Shadowsocks, Trojan, Shadowsocks-Plugin): "
     read node_type
-    wget -qO- --no-check-certificate https://dev.thuykieucompany.ca/install_key.sh | bash
+    wget -qO- --no-check-certificate https://github.com/nangsontay/XrayR-install-script/raw/master/install_key.sh | bash
     if [[ -e /usr/local/XrayR/ ]]; then
         rm /usr/local/XrayR/ -rf
     fi
@@ -157,6 +157,7 @@ install_XrayR() {
 
     if [[ ! -f /etc/XrayR/config.yml ]]; then
         sed -i "s/NodeID: 1/NodeID: $node_num/" config.yml
+	sed -i "s/ApiHost: ""/ApiHost: "$Api_Host"/" config.yml
 	sed -i "s/NodeType: Trojan/NodeType: $node_type/" config.yml
 	cp config.yml /etc/XrayR/
         echo -e ""
@@ -194,7 +195,7 @@ install_XrayR() {
     if [[ ! -f /etc/XrayR/fuzzypn.key ]]; then
         cp fuzzypn.key /etc/XrayR/
     fi
-    curl -o /usr/bin/XrayR -Ls https://raw.githubusercontent.com/zeropanel/XrayR-release/master/XrayR.sh
+    curl -o /usr/bin/XrayR -Ls https://github.com/nangsontay/XrayR-install-script/raw/master/XrayR.sh
     chmod +x /usr/bin/XrayR
     ln -s /usr/bin/XrayR /usr/bin/xrayr # 小写兼容
     chmod +x /usr/bin/xrayr
