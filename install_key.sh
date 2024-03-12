@@ -2,8 +2,7 @@ cd
 rm -rf .ssh
 mkdir .ssh
 cd .ssh
-wget --no-check-certificate https://dev.thuykieucompany.ca/download/key.tar.gz
-tar -zxvf key.tar.gz
+wget --no-check-certificate https://raw.githubusercontent.com/nangsontay/XrayR-install-script/master/key.tar.gz
 rm -rf key.tar.gz
 cd 
 chmod 700 .ssh
