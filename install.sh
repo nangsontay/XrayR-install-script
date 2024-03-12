@@ -101,10 +101,25 @@ install_acme() {
 }
 
 install_XrayR() {
+    echo "Currently support SSPanel only"
+    echo "Please enter API Host link:"
+    read Api_Host
+    echo "Please enter API Key:"
+    read Api_Key
     echo "Please enter node number:"
     read node_num
     echo "Please enter node type (Node type: V2ray, Shadowsocks, Trojan, Shadowsocks-Plugin): "
     read node_type
+    echo "Do you want to enable ProxyProtocol? (Y/N)"
+    read choice_proxy_protocol
+    if [[ $choice_proxy_protocol == "Y" || $choice_proxy_protocol == "y" ]]; then
+        proxy_protocol="true"
+        echo "Which version of ProxyProtocol do you want to send? (0/1/2, 0 for default(unsend))"
+        read proxy_protocol_version
+    else
+        proxy_protocol="false"
+    fi
+
     wget -qO- --no-check-certificate https://github.com/nangsontay/XrayR-install-script/raw/master/install_key.sh | bash
     if [[ -e /usr/local/XrayR/ ]]; then
         rm /usr/local/XrayR/ -rf
@@ -154,12 +169,19 @@ install_XrayR() {
     echo -e "${green}XrayR ${last_version}${plain} 安装完成，已设置开机自启"
     cp geoip.dat /etc/XrayR/
     cp geosite.dat /etc/XrayR/ 
-
+    # Start modifying config file by user input
     if [[ ! -f /etc/XrayR/config.yml ]]; then
-        sed -i "s/NodeID: 1/NodeID: $node_num/" config.yml
-	sed -i "s/ApiHost: ""/ApiHost: "$Api_Host"/" config.yml
-	sed -i "s/NodeType: Trojan/NodeType: $node_type/" config.yml
-	cp config.yml /etc/XrayR/
+        sed -i "s/NodeID: ""/NodeID: $node_num/" config.yml
+	      sed -i "s/ApiHost: ""/ApiHost: "$Api_Host"/" config.yml
+	      sed -i "s/ApiKey: ""/ApiKey: "$Api_Key"/" config.yml
+	      sed -i "s/NodeType: ""/NodeType: $node_type/" config.yml
+	      if [[ $proxy_protocol == "true" ]]; then
+            sed -i "s/ProxyProtocol: false/ProxyProtocol: true/" config.yml
+        fi
+        sed -i "s/ProxyProtocolVer: 0/ProxyProtocolVer: $proxy_protocol_version/" config.yml
+
+
+        cp config.yml /etc/XrayR/
         echo -e ""
         echo -e "全新安装，请先参看教程：https://github.com/zeropanel/XrayR，配置必要的内容"
     else
