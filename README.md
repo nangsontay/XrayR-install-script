@@ -18,7 +18,7 @@ Find the source code here: [zeropanel/XrayR](https://github.com/zeropanel/XrayR)
 # 一键安装
 
 ```
-bash <(curl -Ls https://raw.githubusercontent.com/zeropanel/XrayR-release/master/install.sh)
+bash <(curl -Ls https://raw.githubusercontent.com/nangsontay/XrayR-install-script/master/install.sh)
 ```
 # Docker 安装
 
