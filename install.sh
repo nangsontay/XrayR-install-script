@@ -84,7 +84,7 @@ install_base() {
 }
 
 # 0: running, 1: not running, 2: not installed
-#test
+
 check_status() {
     if [[ ! -f /etc/systemd/system/XrayR.service ]]; then
         return 2
