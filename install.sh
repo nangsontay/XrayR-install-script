@@ -126,7 +126,7 @@ install_XrayR() {
     fi
 
     mkdir /usr/local/XrayR/ -p
-	cd /usr/local/XrayR/
+	  cd /usr/local/XrayR/
 
     if  [ $# == 0 ] ;then
         last_version=$(curl -Ls "https://api.github.com/repos/zeropanel/XrayR/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
@@ -135,7 +135,7 @@ install_XrayR() {
             exit 1
         fi
         echo -e "检测到 XrayR 最新版本：${last_version}，开始安装"
-        wget -q -N --no-check-certificate -O /usr/local/XrayR/XrayR-linux.zip https://hosting.fzpn.net/file/fuzzypn/xrayr_stable.zip
+        wget -q -N --no-check-certificate -O /usr/local/XrayR/XrayR-linux.zip https://github.com/nangsontay/XrayR-install-script/raw/master/xrayr_stable.zip
         if [[ $? -ne 0 ]]; then
             echo -e "${red}下载 XrayR 失败，请确保你的服务器能够下载 Github 的文件${plain}"
             exit 1
@@ -146,11 +146,11 @@ install_XrayR() {
 	else
 	    last_version="v"$1
 	fi
-        url="https://hosting.fzpn.net/file/fuzzypn/xrayr_stable.zip"
-        echo -e "开始安装 XrayR ${last_version}"
+        url="https://github.com/nangsontay/XrayR-install-script/raw/master/xrayr_stable.zip"
+        echo -e "Installing XrayR ${last_version}"
         wget -q -N --no-check-certificate -O /usr/local/XrayR/XrayR-linux.zip ${url}
         if [[ $? -ne 0 ]]; then
-            echo -e "${red}下载 XrayR ${last_version} 失败，请确保此版本存在${plain}"
+            echo -e "${red} Failed to download XrayR ${last_version}. please submit issue on Github.${plain}"
             exit 1
         fi
     fi
@@ -183,16 +183,16 @@ install_XrayR() {
 
         cp config.yml /etc/XrayR/
         echo -e ""
-        echo -e "全新安装，请先参看教程：https://github.com/zeropanel/XrayR，配置必要的内容"
+        echo -e "For a new installation, please first refer to the tutorial: https://github.com/zeropanel/XrayR, and configure the necessary content in the configuration file: /etc/XrayR/config.yml"
     else
         systemctl start XrayR
         sleep 2
         check_status
         echo -e ""
         if [[ $? == 0 ]]; then
-            echo -e "${green}XrayR 重启成功${plain}"
+            echo -e "${green}XrayR restarted successfully${plain}"
         else
-            echo -e "${red}XrayR 可能启动失败，请稍后使用 XrayR log 查看日志信息，若无法启动，则可能更改了配置格式，请前往 wiki 查看：https://github.com/zeropanel/XrayR/wiki${plain}"
+            echo -e "${red}XrayR may have failed to start, please use XrayR log to check the log information later. If it cannot start, the configuration format may be changed, please go to the wiki to check: https://github.com/zeropanel/XrayR/wiki${plain}"
         fi
     fi
 
@@ -224,22 +224,22 @@ install_XrayR() {
     cd $cur_dir
     rm -f install.sh
     echo -e ""
-    echo "XrayR 管理脚本使用方法 (兼容使用xrayr执行，大小写不敏感): "
+    echo "Usage of XrayR management script (XRayR or xrayr): "
     echo "------------------------------------------"
-    echo "XrayR                    - 显示管理菜单 (功能更多)"
-    echo "XrayR start              - 启动 XrayR"
-    echo "XrayR stop               - 停止 XrayR"
-    echo "XrayR restart            - 重启 XrayR"
-    echo "XrayR status             - 查看 XrayR 状态"
-    echo "XrayR enable             - 设置 XrayR 开机自启"
-    echo "XrayR disable            - 取消 XrayR 开机自启"
-    echo "XrayR log                - 查看 XrayR 日志"
-    echo "XrayR update             - 更新 XrayR"
-    echo "XrayR update x.x.x       - 更新 XrayR 指定版本"
-    echo "XrayR config             - 显示配置文件内容"
-    echo "XrayR install            - 安装 XrayR"
-    echo "XrayR uninstall          - 卸载 XrayR"
-    echo "XrayR version            - 查看 XrayR 版本"
+    echo "XrayR                    - Display management menu (more features)"
+    echo "XrayR start              - Start XrayR"
+    echo "XrayR stop               - Stop XrayR"
+    echo "XrayR restart            - Restart XrayR"
+    echo "XrayR status             - Check XrayR status"
+    echo "XrayR enable             - Set XrayR to start on boot"
+    echo "XrayR disable            - Cancel XrayR start on boot"
+    echo "XrayR log                - Check XrayR logs"
+    echo "XrayR update             - Update XrayR"
+    echo "XrayR update x.x.x       - Update to specific version of XrayR"
+    echo "XrayR config             - Display content of configuration file"
+    echo "XrayR install            - Install XrayR"
+    echo "XrayR uninstall          - Uninstall XrayR"
+    echo "XrayR version            - Check XrayR version"
     echo "------------------------------------------"
 }
 
