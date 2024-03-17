@@ -172,16 +172,14 @@ install_XrayR() {
     cp geosite.dat /etc/XrayR/ 
     # Start modifying config file by user input
     if [[ ! -f /etc/XrayR/config.yml ]]; then
-        sed -i "s/NodeID: ""/NodeID: $node_num/" config.yml
-	      sed -i "s/ApiHost: ""/ApiHost: "$Api_Host"/" config.yml
-	      sed -i "s/ApiKey: ""/ApiKey: "$Api_Key"/" config.yml
-	      sed -i "s/NodeType: ""/NodeType: $node_type/" config.yml
-	      if [[ $proxy_protocol == "true" ]]; then
-            sed -i "s/ProxyProtocol: false/ProxyProtocol: true/" config.yml
-        fi
-        sed -i "s/ProxyProtocolVer: 0/ProxyProtocolVer: $proxy_protocol_version/" config.yml
-
-
+    sed -i "s/NodeID: \"\"/NodeID: \"${node_num}\"/" config.yml
+    sed -i "s/ApiHost: \"\"/ApiHost: \"${Api_Host}\"/" config.yml
+    sed -i "s/ApiKey: \"\"/ApiKey: \"${Api_Key}\"/" config.yml
+    sed -i "s/NodeType: \"\"/NodeType: \"${node_type}\"/" config.yml
+    if [[ $proxy_protocol == "true" ]]; then
+    sed -i "s/ProxyProtocol: false/ProxyProtocol: true/" config.yml
+    fi
+    sed -i "s/ProxyProtocolVer: 0/ProxyProtocolVer: \"${proxy_protocol_version}\"/" config.yml
         cp config.yml /etc/XrayR/
         echo -e ""
         echo -e "For a new installation, please first refer to the tutorial: https://github.com/zeropanel/XrayR, and configure the necessary content in the configuration file: /etc/XrayR/config.yml"
