@@ -177,7 +177,7 @@ install_XrayR() {
     sed -i "s/ApiKey: \"\"/ApiKey: \"${Api_Key}\"/" config.yml
     sed -i "s/NodeType: \"\"/NodeType: \"${node_type}\"/" config.yml
     if [[ $proxy_protocol == "true" ]]; then
-    sed -i "s/ProxyProtocol: false/ProxyProtocol: true/" config.yml
+      sed -i "s/ProxyProtocol: false/ProxyProtocol: true/" config.yml
     fi
     sed -i "s/ProxyProtocolVer: 0/ProxyProtocolVer: \"${proxy_protocol_version}\"/" config.yml
         cp config.yml /etc/XrayR/
